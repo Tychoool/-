@@ -5,14 +5,14 @@ int main() {
 	int month;
 	int h;  
 	int count = 0;
-	for (year = 1000; year < 3000; year++) {/*年份在1000≤year≤3000*/
-		y = year;  /*把年份赋值给y，y储存后四位数,判断是否年份倒数是否为合法日期*/
+	for (year = 1000; year < 3000; year++) {
+		y = year;  
 		month = y % 100; 
 		month = (month % 10) * 10 + month / 10; 
 		day = y / 100;
 		day = (day % 10) * 10 + day / 10; 
 		h = 0;
-		switch (month) { /*十二月份天数，判断日期合法*/
+		switch (month) { 
 			case 1:
 			case 3:
 			case 5:
@@ -31,7 +31,7 @@ int main() {
 					h = 1;
 				break;
 			case 2:
-				if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) { /*判断是否为闰年*/
+				if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) { 
 					if (day <= 29)
 						h = 1;
 				} else {
@@ -40,9 +40,9 @@ int main() {
 				}
 				break;
 			default:
-				continue; /*后两位倒过来构不成月份，则结束本次循环，然后进行下一次是否执行循环的判定*/
+				continue; 
 		}
-		if (h != 0) { /*能构成回文日*/
+		if (h != 0) { 
 			y = year;
 			yd = year; 
 			while (y > 0) {
