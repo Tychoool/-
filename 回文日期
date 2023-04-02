@@ -1,0 +1,62 @@
+#include <stdio.h>
+ 
+int main() {
+	int year, day, y, yd;
+	int month;
+	int h;  
+	int count = 0;
+	for (year = 1000; year < 3000; year++) {/*年份在1000≤year≤3000*/
+		y = year;  /*把年份赋值给y，y储存后四位数,判断是否年份倒数是否为合法日期*/
+		month = y % 100; 
+		month = (month % 10) * 10 + month / 10; 
+		day = y / 100;
+		day = (day % 10) * 10 + day / 10; 
+		h = 0;
+		switch (month) { /*十二月份天数，判断日期合法*/
+			case 1:
+			case 3:
+			case 5:
+			case 7:
+			case 8:
+			case 10:
+			case 12:
+				if (day <= 31)
+					h = 1;
+				break;
+			case 4:
+			case 6:
+			case 9:
+			case 11:
+				if (day <= 30)
+					h = 1;
+				break;
+			case 2:
+				if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) { /*判断是否为闰年*/
+					if (day <= 29)
+						h = 1;
+				} else {
+					if (day <= 28)
+						h = 1;
+				}
+				break;
+			default:
+				continue; /*后两位倒过来构不成月份，则结束本次循环，然后进行下一次是否执行循环的判定*/
+		}
+		if (h != 0) { /*能构成回文日*/
+			y = year;
+			yd = year; 
+			while (y > 0) {
+				yd = yd * 10 + y % 10;
+				y = y / 10;
+			}
+			printf("%d\t", yd);
+			count++;
+			if (count % 5 == 0)
+				printf("\n");
+ 
+		}
+	}
+ 
+	printf("\n%d\n", count);
+	return 0;
+}
